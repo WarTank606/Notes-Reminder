@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <form (ngSubmit)="onSaveNote(form)" #form="ngForm">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-6">
+          <label for="Name_Note"><h1>Name of Note</h1></label>
+          <br />
+          <input
+            class="form-control"
+            type="text"
+            id="Name_Note"
+            [ngModel] ="EditName"
+            name="note_name"
+            required
+            #name_note = "ngModel"
+          />
+          <span class="help-block" *ngIf="!name_note.valid && name_note.touched"><h4>Please, enter a valid name!</h4></span>
+          <br />
+          <label for="Note"><h2>Note Body</h2></label>
+          <br />
+          <textarea
+            class="form-control"
+            type="text"
+            id="Note"
+            rows="10"
+            cols="80"
+            [ngModel] ="EditNote"
+            name="note"
+            required
+            #note = "ngModel"
+          >
+          </textarea>
+          <span class="help-block" *ngIf="!note.valid && note.touched"><h4>Please, enter a valid note!</h4></span>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="btn-toolbar">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              [disabled]="!form.valid"        
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-lg"
+              routerLink="/note_page"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

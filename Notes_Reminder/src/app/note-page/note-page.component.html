@@ -1,0 +1,122 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6">
+      <a
+        class="list-group-flush"
+        style="cursor: pointer"
+        (click)="SelectName()"
+      >
+        <h1>
+          <input 
+          [(ngModel)]="PageName" 
+          [readOnly]="!EditPageName"
+        />
+        </h1>
+      </a>
+    </div>
+    <div class="col-xs-6">
+      <button
+      class="btn btn-warning"
+      *ngIf="EditPageButton && !EditPageName"
+      (click)="ChangePageName()"
+      
+    >
+    
+      Change Page Name
+    </button>
+
+
+    <div class="btn-toolbar" *ngIf="EditPageName">
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="OnSavePageName()"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="OnCancelPageName()"
+      >
+        Cancel
+      </button>
+    </div>
+
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <a
+        class="list-group-item clearfix"
+        *ngFor="let X of Note; let i = index"
+        (click)="NoteSelected(i)"
+        [routerLink]="[i]"
+        routerLinkActive="active"
+      >
+        <div class="pull-left">
+          <h4 class="list-group-item-heading Active">{{ X.name }}</h4>
+          <p class="list-group-item-text">{{ X.note }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="btn-toolbar" *ngIf="!Delete_Selection">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          routerLink="/new_notes"
+          (click)="CreateNote()"
+        >
+          Create New Note
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning btn-lg"
+          routerLink="/new_notes"
+          (click)="EditMode_Selector()"
+          [disabled]="Index == null"
+        >
+          Edit Notes
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-lg"
+          (click)="Delete_Item()"
+          [disabled]="Index == null"
+        >
+          Delete Notes
+        </button>
+      </div>
+
+      <div class="row" *ngIf="Delete_Selection">
+        <div class="col-xs-12">
+          <h1>Are you should you want to delete Note "{{ Name }}" ?</h1>
+          <div class="btn-toolbar">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg"
+              routerLink="/note_page"
+              (click)="ConfirmDeletion()"
+            >
+              Confirm
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-lg"
+              routerLink="/note_page"
+              (click)="CancelDeletion()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
